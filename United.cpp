@@ -498,7 +498,7 @@ bool isGreater(Moment m1, Moment m2)
 }
 
 
-void dataDifference(Moment m1, Moment m2)
+void calculateDataDifference(Moment m1, Moment m2)
 {
 
 	//Если m1 был позже m2,
@@ -553,8 +553,9 @@ void dataDifference(Moment m1, Moment m2)
 
 	std::cout << "." << std::endl;
 
-	std::cout << "Также разница составляет ровно " << d
-		<< " " << d_case(d) << "." << std::endl;
+	if (counter.getDay() != d)
+		std::cout << "Также разница составляет ровно " << d
+				  << " " << d_case(d) << "." << std::endl;
 }
 
 
@@ -872,6 +873,24 @@ int main()
 						v.clear();
 						CBS = 0;
 						system("cls");
+						continue;
+					}
+
+					//Обработка сравнения дат
+					if (smaller(input.substr(1, 4)) == "date" || smaller(input.substr(1, 4)) == "data") 
+					{
+						Moment* m1 = nullptr, * m2 = nullptr;
+						do
+						{
+							std::cout << "Введите первую дату в формате ДД.ММ.ГГГГ: ";
+						}
+						while (parseDate(&m1) != true);
+						do
+						{
+							std::cout << "Введите вторую дату в формате ДД.ММ.ГГГГ: ";
+						} while (parseDate(&m2) != true);
+
+						calculateDataDifference((*m1), (*m2));
 						continue;
 					}
 				}

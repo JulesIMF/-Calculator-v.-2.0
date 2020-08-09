@@ -905,6 +905,9 @@ int main()
 
 			for (int i = 0; i < input.size(); i++)
 			{
+				//Пробел ничего не значит
+				if (input[i] == ' ') 
+					continue;
 
 				//Если тут буква, то это переменная
 				if (isalpha(input[i]))
